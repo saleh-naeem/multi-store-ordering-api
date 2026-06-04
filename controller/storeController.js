@@ -69,4 +69,10 @@ const getStoresById=asyncHandler(async(req,res)=>{
     res.status(200).json(r.rows[0])
 })
 
-module.exports={createStore,getStores,getStoresById,deleteStores,updateStores}
+// get all categories
+const getCategories= asyncHandler(async(req,res)=>{
+    const categories= await pool.query("select * from categories ")
+    res .status(200).json(categories.rows)
+})
+
+module.exports={createStore,getStores,getStoresById,deleteStores,updateStores,getCategories}

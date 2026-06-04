@@ -42,12 +42,7 @@ catch(error){
 // update customer
 const updateCustomer= asyncHandler(async(req,res)=>{
 let r;
-//check if customer exists
-if (r.rows.length === 0) {
-  return res.status(404).json({
-    message: "Customer or address not found",
-  });
-}
+
   //customer query
   if(req.body.field==="phone"){
     const customer = await pool.query(
@@ -72,8 +67,30 @@ if (r.rows.length === 0) {
     else{
        return res.status(400).json(`field must be one of phone ${fields}`)
     }
-    
+      //check if customer exists
+  if (r.rows.length === 0) {
+    return res.status(404).json({
+      message: "Customer or address not found",
+    });
+  }
     res.status(200).json(r.rows[0])
 })
 
-module.exports={createCustomer,updateCustomer}
+//get customer profile
+const getCustomer=asyncHandler(async(req,res)=>{
+  const customer = await pool.query(
+    `select * from customers
+    where user_id=$1
+    `,[req.user.id])
+    res.status(200).json(customer.rows[0])
+})
+//get customer address
+const getAddress=asyncHandler(async(req,res)=>{
+  const address = await pool.query(
+     `SELECT a.*
+     FROM addresses a
+     JOIN customers c ON c.id = a.customer_id
+     WHERE c.user_id = $1`,[req.user.id])
+    res.status(200).json(address.rows)
+})
+module.exports={getAddress,getCustomer,createCustomer,updateCustomer}

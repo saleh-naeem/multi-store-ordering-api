@@ -4,12 +4,20 @@ const bcrypt=require('bcrypt')
 const jwt= require('jsonwebtoken')
 const asyncHandler =require('express-async-handler')
 // validtion
-const registerVaild= joi.object({
-    email:joi.string().required()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-    name:joi.string().alphanum().min(3).max(30).required(),
-    password:joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required()
-})
+const registerVaild = joi.object({
+  email: joi.string().required()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+
+  name: joi.string().alphanum().min(3).max(30).required(),
+
+  password: joi.string()
+    .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+    .required(),
+
+  role: joi.string()
+    .valid("customer", "store")
+    .default("customer")
+});
 //login validtion
 const loginVaild= joi.object({
     email:joi.string().required()

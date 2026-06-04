@@ -121,8 +121,6 @@ DB_PASSWORD=your_database_password
 DB_PORT=5432
 ```
 
-> Note: In the current code, the JWT secret variable is named `SECRYTKEY`.
-
 ---
 
 ## Installation and Running
@@ -130,8 +128,7 @@ DB_PORT=5432
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/store-backend-api.git
-cd store-backend-api
+git clone https://github.com/saleh-naeem/store.git
 ```
 
 ### 2. Install dependencies
@@ -151,13 +148,7 @@ Create a `.env` file and add your database configuration and JWT secret.
 ### 5. Run the server
 
 ```bash
-npm start
-```
-
-Or during development:
-
-```bash
-npm run dev
+node server
 ```
 
 Server will run on:
@@ -261,7 +252,6 @@ store_categories
 items
 orders
 order_items
-payments
 ```
 
 ---

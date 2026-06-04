@@ -128,7 +128,7 @@ DB_PORT=5432
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/saleh-naeem/store.git
+git clone https://github.com/saleh-naeem/multi-store-ordering-api.git
 ```
 
 ### 2. Install dependencies
